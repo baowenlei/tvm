@@ -693,7 +693,7 @@ llvm::Value* CodeGenLLVM::CreateIntrinsic(const Call* op) {
     return value;
   } else if (op->is_intrinsic(Call::reinterpret)) {
     llvm::Type * target = LLVMType(op->type);
-    return builder_->CreateBitCast(MakeValue(op->args[0]), target);
+    return builder_->CreateBitOrPointerCast(MakeValue(op->args[0]), target);
   } else if (op->is_intrinsic("vectorlow")) {
     llvm::Value *v = MakeValue(op->args[0]);
     int l = v->getType()->getVectorNumElements();
